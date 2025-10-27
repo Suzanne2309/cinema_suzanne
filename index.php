@@ -10,7 +10,7 @@ $ctrlCinema = new CinemaController(); //on instancie le nouvel objet ConemaContr
 
 if(isset($_GET["action"])) {  //SI la variable est définie (déclarée et non-null), alors on va chercher action 
     switch ($_GET["action"]) { //Quand on va chercher action, deux situations vont être analysé par Switch
-        case "Listfilms" : $ctrlCinema->ListFilms(); breack; //action va récupérer la liste des films (les informations des films) dans la classe controllerCinema
-        case "ListActeurs" : $ctrlCinema->ListActeurs(); breack; //action va récupérer la liste des acteurs à travers de casting dans la classe controllerCinema
+        case "ListFilms" : $ctrlCinema->ListFilms(); break; //action va récupérer la liste des films (les informations des films) dans la classe controllerCinema
+        case "ListActeurs" : $ctrlCinema->ListActeurs(); break; //action va récupérer la liste des acteurs à travers de casting dans la classe controllerCinema
     }
 }

@@ -6,7 +6,7 @@ use Model\Connect; //On fait appel au namespace Model pour accéder à la métho
 class CinemaController {
 
     /** Lister les films **/
-    public function listFilms() { //On crée la méthode qui permettra d'afficher une liste des films
+    public function ListFilms() { //On crée la méthode qui permettra d'afficher une liste des films
         $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
         $requete = $pdo->query(" 
             SELECT title, realease_date
