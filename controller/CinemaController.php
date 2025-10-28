@@ -15,14 +15,6 @@ class CinemaController {
         require "view/listFilms.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
     }
 
-    /** Detail acteur **/
-    public function detailActeur($id) {
-        $pdo = Connect::seConnecter();
-        $requeteDetailActeur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday,p.nationality, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM actor a INNER JOIN person p ON a.id_person = p.id_person WHERE a.id_actor = :id");
-        $requeteDetailActeur->execute(["id" => $id]);
-        require "view/acteur/detailActeur.php";
-    }
-
     /** Detail film **/
     public function detailFilm($id) {
         $pdo = Connect::seConnecter();
