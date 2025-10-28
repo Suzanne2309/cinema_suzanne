@@ -1,0 +1,1 @@
+<!-- methode pour la page d'accueil. -->

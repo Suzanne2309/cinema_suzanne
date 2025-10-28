@@ -18,9 +18,9 @@ class CinemaController {
     /** Detail acteur **/
     public function detailActeur($id) {
         $pdo = Connect::seConnecter();
-        $requeteDetailActeur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM actor a INNER JOIN person p ON a.id_person = p.id_person WHERE a.id_actor = :id");
+        $requeteDetailActeur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday,p.nationality, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM actor a INNER JOIN person p ON a.id_person = p.id_person WHERE a.id_actor = :id");
         $requeteDetailActeur->execute(["id" => $id]);
-        require "view/detailActeur.php";
+        require "view/acteur/detailActeur.php";
     }
 
     /** Detail film **/

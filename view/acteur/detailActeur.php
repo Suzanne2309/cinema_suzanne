@@ -1,6 +1,6 @@
 <?php ob_start(); //On démarre la vue avec ob_start ce qui va permettre de pouvoir exécuter plusieurs rêquettes en même temps, en stockant les résultats dans la mémoire tampon (ici la variable $contenu)
 
-$detailFilm = $requeteDetailFilm->fetch(); ?>
+$acteur = $requeteDetailActeur->fetch(); ?>
 <table class="uk-label uk-table-striped"> <!-- On crée un tableau pour afficher la liste des films, avec leur titre et date de sortie -->
     <thead> <!-- On définit la ligne des titres des colonnes -->
         <tr>
@@ -15,10 +15,11 @@ $detailFilm = $requeteDetailFilm->fetch(); ?>
     <tbody> <!-- On définit le contenue des colonnes -->
          <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
-                <td><?php echo $detailFilm["first_name"]; ?> <?php echo $detailFilm["last_name"];?></td>
-                <td><?php echo $detailFilm["film_duration"]; ?></td>
-                <td><?php echo $detailFilm["realease_date"]; ?></td>
-                <td><?php echo $detailFilm["notation"]; ?></td>
+                <td><?php echo $acteur["first_name"]; ?> <?php echo $acteur["last_name"];?></td>
+                <td><?php echo $acteur["birthday"]; ?></td>
+                <td><?php echo $acteur["age"]; ?></td>
+                <td><?php echo $acteur["nationality"]; ?></td>
+                <td><?php echo $acteur["filmography"]; ?></td>
             </tr>
             <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>
