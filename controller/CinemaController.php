@@ -15,19 +15,24 @@ class CinemaController {
         require "view/listFilms.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
     }
 
-    /** detail acteur **/
-    public function detActeurs($id) {
-        $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
-        $requeteActor = $pdo->prepare("SELECT first_name, last_name FROM actor INNER JOIN person ON id_person = id_person WHERE id_actor = :id"); //on va préparer la requette sql de notre choix (ici afficher les acteurs)
-        $requeteActor->execute(["id" => $id]); //
-        require "view/acteur/detailActeur.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
+    /** Detail acteur **/
+    public function detailActeur($id) {
+        $pdo = Connect::seConnecter();
+        $requeteDetailActeur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM actor a INNER JOIN person p ON a.id_person = p.id_person WHERE a.id_actor = :id");
+        $requeteDetailActeur->execute(["id" => $id]);
+        require "view/detailActeur.php";
     }
 
-    /** detail film **/
+    /** Detail film **/
     public function detailFilm($id) {
         $pdo = Connect::seConnecter();
-        $requeteDetFilm = $pdo->prepare("SELECT m.id_movie, m.title, m.realease_date, p.first_name, p.last_name, DATE_FORMAT(SEC_TO_TIME(m.duration * 60), '%H:%i') AS film_duration FROM movie m INNER JOIN director d ON m.id_director = d.id_director INNER JOIN person p ON d.id_person = p.id_person WHERE id_movie = :id");
-        $requeteDetFilm->execute(["id" => $id]);
+        $requeteDetailFilm = $pdo->prepare("SELECT m.id_movie, m.title, m.realease_date, m.notation, p.first_name, p.last_name, DATE_FORMAT(SEC_TO_TIME(m.duration * 60), '%H:%i') AS film_duration FROM movie m INNER JOIN director d ON m.id_director = d.id_director INNER JOIN person p ON d.id_person = p.id_person WHERE id_movie = :id");
+        $requeteDetailFilm->execute(["id" => $id]);
+    
+    /** casting d'un film **/
+        $pdo = Connect::seConnecter();
+        $requeteCasting = $pdo->prepare("SELECT p.first_name, p.last_name, r.character, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM casting c INNER JOIN movie m ON c.id_movie = m.id_movie INNER JOIN actor a ON c.id_actor=a.id_actor INNER JOIN person p ON a.id_person=p.id_person INNER JOIN role r ON c.id_role = r.id_role WHERE c.id_movie = :id");
+        $requeteCasting->execute(["id" => $id]);
         require "view/detailFilm.php";
     }
 }
