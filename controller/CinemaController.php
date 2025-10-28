@@ -6,12 +6,28 @@ use Model\Connect; //On fait appel au namespace Model pour accéder à la métho
 class CinemaController {
 
     /** Lister les films **/
-    public function ListFilms() { //On crée la méthode qui permettra d'afficher une liste des films
+    public function listFilms() { //On crée la méthode qui permettra d'afficher une liste des films
         $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
         $requete = $pdo->query(" 
             SELECT title, realease_date
             FROM movie
-        "); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie)
-        require "view/ListFilms.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
+        "); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie       
+        require "view/listFilms.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
+    }
+
+    /** detail acteur **/
+    public function detActeurs($id) {
+        $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
+        $requeteActor = $pdo->prepare("SELECT first_name, last_name FROM actor INNER JOIN person ON id_person = id_person WHERE id_actor = :id"); //on va préparer la requette sql de notre choix (ici afficher les acteurs)
+        $requeteActor->execute(["id" => $id]); //
+        require "view/acteur/detailActeur.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
+    }
+
+    /** detail film **/
+    public function detailFilm($id) {
+        $pdo = Connect::seConnecter();
+        $requeteDetFilm = $pdo->prepare("SELECT m.id_movie, m.title, m.realease_date, p.first_name, p.last_name, DATE_FORMAT(SEC_TO_TIME(m.duration * 60), '%H:%i') AS film_duration FROM movie m INNER JOIN director d ON m.id_director = d.id_director INNER JOIN person p ON d.id_person = p.id_person WHERE id_movie = :id");
+        $requeteDetFilm->execute(["id" => $id]);
+        require "view/detailFilm.php";
     }
 }
