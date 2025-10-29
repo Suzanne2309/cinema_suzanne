@@ -19,6 +19,7 @@ if(isset($_GET["action"])) {  //SI la variable est définie (déclarée et non-n
         case "listFilms" : $ctrlCinema->listFilms(); break; //action va récupérer la liste des films (les informations des films) dans la classe controllerCinema
         case "detailActeur" : $ctrlPerson->detailActeur($id); break;
         case "detailFilm" : $ctrlCinema->detailFilm($id); break; //action va récupérer la liste des acteurs à travers de casting dans la classe controllerCinema
+        case "detailRealisateur" : $ctrlCinema->detailRealisateur($id); break;
         case "default" : $ctrlHome->home(); break;
     }
 }

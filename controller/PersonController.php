@@ -11,4 +11,11 @@ class PersonController {
         $requeteDetailActeur->execute(["id" => $id]);
         require "view/acteur/detailActeur.php";
     }
+
+    public function detailRealisateur($id) {
+        $pdo = Connect::seConnecter();
+        $requeteDetailRealisateur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday,p.nationality, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM director d INNER JOIN person p ON d.id_person = p.id_person WHERE d.id_director = :id");
+        $requeteDetailRealisateur->execute(["id" => $id]);
+        require "view/detailRealisateur.php";
+    }
 }
