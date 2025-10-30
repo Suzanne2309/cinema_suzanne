@@ -15,7 +15,7 @@ $detailFilm = $requeteDetailFilm->fetch(); ?>
          <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
                 <td><?php echo $detailFilm["title"]; ?></td>
-                <td><?php echo $detailFilm["first_name"]; ?> <?php echo $detailFilm["last_name"];?></td>
+                <td><?php echo $detailFilm["last_name"]; ?> <?php echo $detailFilm["first_name"];?></td>
                 <td><?php echo $detailFilm["film_duration"]; ?></td>
                 <td><?php echo $detailFilm["realease_date"]; ?></td>
                 <td><?php echo $detailFilm["notation"]; ?></td>

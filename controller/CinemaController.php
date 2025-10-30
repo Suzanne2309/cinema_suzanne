@@ -27,4 +27,13 @@ class CinemaController {
         $requeteCasting->execute(["id" => $id]);
         require "view/detailFilm.php";
     }
+
+    /** Lister les genres **/
+    public function listGenres() { //On crée la méthode qui permettra d'afficher une liste des films
+        $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
+        $requeteGenres = $pdo->query(" 
+        SELECT f.category_name
+        FROM film_genre f"); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie       
+        require "view/listGenres.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
+    }
 }

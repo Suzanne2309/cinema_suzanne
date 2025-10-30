@@ -17,9 +17,12 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 if(isset($_GET["action"])) {  //SI la variable est définie (déclarée et non-null), alors on va chercher action 
     switch ($_GET["action"]) { //Quand on va chercher action, deux situations vont être analysé par Switch
         case "listFilms" : $ctrlCinema->listFilms(); break; //action va récupérer la liste des films (les informations des films) dans la classe controllerCinema
+        case "listGenres" : $ctrlCinema->listGenres(); break;
+        case "listActeurs" : $ctrlPerson->listActeurs(); break;
+        case "listRealisateurs" : $ctrlPerson->listRealisateurs(); break;
         case "detailActeur" : $ctrlPerson->detailActeur($id); break;
         case "detailFilm" : $ctrlCinema->detailFilm($id); break; //action va récupérer la liste des acteurs à travers de casting dans la classe controllerCinema
-        case "detailRealisateur" : $ctrlCinema->detailRealisateur($id); break;
+        case "detailRealisateur" : $ctrlPerson->detailRealisateur($id); break;
         case "default" : $ctrlHome->home(); break;
     }
 }
