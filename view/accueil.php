@@ -5,7 +5,7 @@
         <h2>Vous en avez marre de scroller pour choisir un film ?</h2>
         <div class="container">
             <p>Attrapez votre popcorn, installez-vous confortablement dans votre canapé et laissez-vous surprendre par notre sélection réduite.</p>
-            <button>Faites votre choix !</button>
+            <button><a href="index.php?action=listFilms">Faites votre choix !</a></button>
         </div>
     </article>
 </div>

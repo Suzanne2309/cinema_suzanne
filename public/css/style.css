@@ -63,8 +63,9 @@ nav ul {
 }
 
 nav li {
-    width: 25%;
+    width: 15%;
     list-style: none;
+    text-align: center;
 }
 
 nav li a {
@@ -72,13 +73,45 @@ nav li a {
     text-decoration: none;
 }
 
+nav ul .dropdown {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav li .dropclick {
+    color: #FFDFAC;
+    text-decoration: none;
+}
+
+nav li svg {
+    width: 6%;
+}
+
+nav li svg path{
+    fill: #FFDFAC;
+}
+
+nav li .dropdown-content {}
+
 /*** Bouton connexion ***/
 button .connexion_navbar {
     width: 20%;
 }
 
-/********************************* Main *********************************/
+/********************************* Main : Accueil *********************************/
+.inscription {
+    width: 100%;
+}
 
+.inscription .image {
+    width: 100%;
+}
+
+.inscription .image img{
+    width: 15%;
+}
 
 /********************************* Footer *********************************/
 

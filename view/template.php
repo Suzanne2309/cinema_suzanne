@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $titre ?></title>
     <link rel="stylesheet" href="public/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 
@@ -17,10 +16,15 @@
         <div class="back_navbar">
             <nav>
                 <ul>
-                    <li><a href="">Accueil</a></li>
-                    <li><a href="">Films</a></li> <!-- mettre un overlay avec les différents films -->
-                    <li><a href="">Genres</a></li> <!-- mettre un overlay avec les différents genres -->
-                    <li><a href="">Personnalités</a></li> <!-- mettre un overlay avec option acteurs et réalisateurs -->
+                    <li><a href="index.php?action=default">Accueil</a></li>
+                    <li><a href="index.php?action=listFilms">Films</a></li>
+                    <li><a href="index.php?action=listGenres">Genres</a></li>
+                    <li class="dropdown"><p class="dropclick">Personnalités</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/></svg>
+                        <div class="dropdown-content"> <!-- On va créer une div pour le menu dropdown, qui affichera les onglets acteurs et réalisateurs -->
+                        <a href="index.php?action=listRealisateurs">Réalisateurs</a>
+                        <a href="index.php?action=listActeurs">Acteurs</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <button class="connexion_navbar">Connexion</button>
@@ -45,10 +49,15 @@
     <div class="navbar_footer">
             <nav class="footer">
                 <ul>
-                    <li><a href="">Accueil</a></li>
-                    <li><a href="">Films</a></li> <!-- mettre un overlay avec les différents films -->
-                    <li><a href="">Genres</a></li> <!-- mettre un overlay avec les différents genres -->
-                    <li><a href="">Personnalités</a></li> <!-- mettre un overlay avec option acteurs et réalisateurs -->
+                    <li><a href="index.php?action=default">Accueil</a></li>
+                    <li><a href="index.php?action=listFilms">Films</a></li>
+                    <li><a href="index.php?action=listGenres">Genres</a></li> <!-- mettre un overlay avec les différents genres -->
+                    <li class="dropdown"><p class="dropclick">Personnalités</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/></svg>
+                        <div class="dropdown-content"> <!-- On va créer une div pour le menu dropdown, qui affichera les onglets acteurs et réalisateurs -->
+                        <a href="index.php?action=listRealisateurs">Réalisateurs</a>
+                        <a href="index.php?action=listActeurs">Acteurs</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <small>@2025 Suzanne Pons</small>
@@ -56,6 +65,5 @@
     <button>Connexion</button>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
