@@ -12,7 +12,7 @@
     <tbody> <!-- On définit le contenue des colonnes -->
         <?php foreach($requete->fetchALL() as $film) { ?> <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
-                <td><?= $film["title"] ?></td> <!-- On va ajouter dans le tableau film, le titre du film -->
+                <td><a href="index.php?action=detailFilm&id=<?= $film['id_movie'] ?>"><?= $film["title"] ?></a></td> <!-- On va ajouter dans le tableau film, le titre du film -->
                 <td><?= $film["realease_date"] ?></td> <!-- On va ajouter la date de sortie du film correspondant au tableau -->
             </tr>
             <?php } ?> <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->

@@ -9,9 +9,9 @@
         </tr>
     </thead>
     <tbody> <!-- On définit le contenue des colonnes -->
-        <?php foreach($requeteGenres->fetchALL() as $genres) { ?> <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
+        <?php foreach($requeteGenres->fetchALL() as $genre) { ?> <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
-                <td><?= $genres["category_name"]?></td> <!-- On va ajouter dans le tableau film, le titre du film -->
+                <td><a href="index.php?action=listFilmsByGenre&id=<?= $genre['id_filmGenre'] ?>"><?= $genre["category_name"]?></a></td>
             </tr>
             <?php } ?> <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>

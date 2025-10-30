@@ -14,11 +14,11 @@ $detailFilm = $requeteDetailFilm->fetch(); ?>
     <tbody> <!-- On définit le contenue des colonnes -->
          <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
-                <td><?php echo $detailFilm["title"]; ?></td>
-                <td><?php echo $detailFilm["last_name"]; ?> <?php echo $detailFilm["first_name"];?></td>
-                <td><?php echo $detailFilm["film_duration"]; ?></td>
-                <td><?php echo $detailFilm["realease_date"]; ?></td>
-                <td><?php echo $detailFilm["notation"]; ?></td>
+                <td><?= $detailFilm["title"]; ?></td>
+                <td><a href="index.php?action=detailRealisateur&id=<?= $detailFilm['id_director'] ?>"><?= $detailFilm["last_name"]; ?> <?= $detailFilm["first_name"];?></a></td>
+                <td><?= $detailFilm["film_duration"]; ?></td>
+                <td><?= $detailFilm["realease_date"]; ?></td>
+                <td><?= $detailFilm["notation"]; ?></td>
             </tr>
             <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>
@@ -27,7 +27,7 @@ $detailFilm = $requeteDetailFilm->fetch(); ?>
 <div>
     <h2>Le casting du film : </h2>
     <?php foreach($requeteCasting->fetchALL() as $detailCasting) { ?>
-        <p><?php echo $detailCasting["first_name"]; ?> <?php echo $detailCasting["last_name"];?>, <?php echo $detailCasting["age"]; ?>, dans le rôle de <?php echo $detailCasting["character"];?>.</p>
+        <p><a href="index.php?action=detailActeur&id=<?= $detailCasting['id_actor'] ?>"><?= $detailCasting["first_name"]; ?> <?= $detailCasting["last_name"];?></a>, <?= $detailCasting["age"]; ?>, dans le rôle de <?= $detailCasting["character"];?>.</p>
     <?php } ?>
 
 </div>

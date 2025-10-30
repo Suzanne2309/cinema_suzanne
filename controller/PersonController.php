@@ -7,8 +7,8 @@ class PersonController {
     /** Lister les acteurs **/
     public function listActeurs() { //On crée la méthode qui permettra d'afficher une liste des films
         $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
-        $requeteActeurs = $pdo->query(" 
-        SELECT p.first_name, p.last_name, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age
+        $requeteActeurs = $pdo->query("
+        SELECT a.id_actor, p.first_name, p.last_name, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age
         FROM actor a
         INNER JOIN person p ON a.id_person = p.id_person
         "); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie       
@@ -27,7 +27,7 @@ class PersonController {
     public function listRealisateurs() { //On crée la méthode qui permettra d'afficher une liste des films
         $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
         $requeteRealisateurs = $pdo->query(" 
-        SELECT p.first_name, p.last_name, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age
+        SELECT d.id_director, p.first_name, p.last_name, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age
         FROM director d
         INNER JOIN person p ON d.id_person = p.id_person
         "); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie       

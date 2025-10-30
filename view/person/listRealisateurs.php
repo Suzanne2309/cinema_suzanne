@@ -8,13 +8,13 @@
             <th>NOM</th>
             <th>PRENOM</th>
             <th>AGE</th>
+            <th>DETAIL</th>
         </tr>
     </thead>
     <tbody> <!-- On définit le contenue des colonnes -->
         <?php foreach($requeteRealisateurs->fetchALL() as $realisateurs) { ?> <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
-                <td><?= $realisateurs["last_name"]?></td> <!-- On va ajouter dans le tableau film, le titre du film -->
-                <td><?= $realisateurs["first_name"]?></td>
+                <td><a href="index.php?action=detailRealisateur&id=<?= $realisateurs['id_director'] ?>"><?= $realisateurs["last_name"]?> <?= $realisateurs["first_name"]?></a></td> <!-- On va ajouter dans le tableau film, le titre du film -->
                 <td><?= $realisateurs["age"]?></td> 
             </tr>
             <?php } ?> <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
