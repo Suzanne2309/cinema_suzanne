@@ -20,6 +20,11 @@ class PersonController {
         $pdo = Connect::seConnecter();
         $requeteDetailActeur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday,p.nationality, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM actor a INNER JOIN person p ON a.id_person = p.id_person WHERE a.id_actor = :id");
         $requeteDetailActeur->execute(["id" => $id]);
+
+        /** filmographie d'un Acteur **/
+        $pdo = Connect::seConnecter();
+        $requeteFilmographieActeur = $pdo->prepare("SELECT m.title, m.realease_date, m.id_movie FROM movie m INNER JOIN casting c ON m.id_movie = c.id_movie WHERE c.id_actor = :id");
+        $requeteFilmographieActeur->execute(["id" => $id]);
         require "view/person/detailActeur.php";
     }
 
@@ -39,6 +44,11 @@ class PersonController {
         $pdo = Connect::seConnecter();
         $requeteDetailRealisateur = $pdo->prepare("SELECT p.first_name, p.last_name, p.birthday,p.nationality, p.filmography, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age FROM director d INNER JOIN person p ON d.id_person = p.id_person WHERE d.id_director = :id");
         $requeteDetailRealisateur->execute(["id" => $id]);
+
+        /** filmographie d'un Réalisateur **/
+        $pdo = Connect::seConnecter();
+        $requeteFilmographie = $pdo->prepare("SELECT m.title, m.realease_date, m.id_movie FROM movie m WHERE m.id_director = :id");
+        $requeteFilmographie->execute(["id" => $id]);
         require "view/person/detailRealisateur.php";
     }
 }

@@ -25,6 +25,14 @@ $acteur = $requeteDetailActeur->fetch(); ?>
     </tbody>
 </table>
 
+<div>
+    <h2>filmographie : </h2>
+    <?php foreach($requeteFilmographieActeur->fetchALL() as $filmographie) { ?>
+        <p><a href="index.php?action=detailFilm&id=<?= $filmographie['id_movie'] ?>"><?= $filmographie["title"]; ?></a>, <?= $filmographie["realease_date"];?></p>
+    <?php } ?>
+
+</div>
+
 <?php
 
 //On définit les variables et seront les paramètres dont il faudra définir la valeur à CHAQUE VUE

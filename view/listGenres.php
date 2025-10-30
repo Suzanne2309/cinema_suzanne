@@ -17,6 +17,9 @@
     </tbody>
 </table>
 
+<p>Vous avez pas trouvé votre bonheur ? Ajouter votre film en un click !</p>
+<button><a href="#">+</a></button>
+
 <?php
 
 //On définit les variables et seront les paramètres dont il faudra définir la valeur à CHAQUE VUE
