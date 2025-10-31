@@ -18,7 +18,6 @@ if(isset($_GET["action"])) {  //SI la variable est définie (déclarée et non-n
     switch ($_GET["action"]) { //Quand on va chercher action, deux situations vont être analysé par Switch
         case "listFilms" : $ctrlCinema->listFilms(); break; //action va récupérer la liste des films (les informations des films) dans la classe controllerCinema
         case "listGenres" : $ctrlCinema->listGenres(); break;
-        case "addGenre" : $ctrlCinema->addGenre($addGenre); break;
         case "listFilmsByGenre" : $ctrlCinema->listFilmsByGenre($id); break;
         case "listActeurs" : $ctrlPerson->listActeurs(); break;
         case "listRealisateurs" : $ctrlPerson->listRealisateurs(); break;
