@@ -34,27 +34,25 @@ class CinemaController {
         $requeteGenres = $pdo->query(" 
         SELECT f.id_filmGenre, f.category_name
         FROM film_genre f"
-       ); // on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie
-
-        if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
-        //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
-        $addGenre = filter_input(INPUT_POST, "genre_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //filter sanitize permet de "nettoyer" les données en retirant les balises html et d'encoder les charactères qui sont en dehors des normes ASCII (full special chars)
-        }
-        if($addGenre){  //SI on a la variable filtré
-            $genre = [ //ALORS on peut créer le tableau associatif contenant les données sous formes de variable  
-                "genre_name" => $name, 
-            ];
-
-            $pdo - Connect::seConnecter();
-            $requeteAddGenre = $pdo->query("
-            INSERT INTO film_genre (category_name)
-            VALUES ("$name");
-            ");
-         //On va pouvoir stocker le tableau product vide dans la session, et quand des données sont envoyés et traité par les filtres, alors on remplira le teableau de la session ainsi les produits ajouté sont stocké dans la session
-        }
+        ); // on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie
         require "view/listGenres.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
     }
 
+    public function addGenre() {
+        $pdo = Connect::seConnecter();
+        if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
+        //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
+        $addGenre = filter_input(INPUT_POST, "genre_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //filter sanitize permet de "nettoyer" les données en retirant les balises html et d'encoder les charactères qui sont en dehors des normes ASCII (full special chars)
+        
+            if($addGenre){  //SI on a la variable filtré
+                $requeteAddGenre = $pdo->prepare("INSERT INTO film_genre (category_name) VALUES (':addGenre')");
+                $requeteAddGenre->execute(["addGenre" => $addGenre]);
+         //On va pouvoir stocker le tableau product vide dans la session, et quand des données sont envoyés et traité par les filtres, alors on remplira le teableau de la session ainsi les produits ajouté sont stocké dans la session
+            }
+        }
+        require "view/listGenres.php";
+    }
+    
     public function listFilmsByGenre($id) {
         $pdo = Connect::seConnecter();
         $requeteListFilmsByGenre = $pdo->prepare("SELECT f.id_filmGenre, a.id_movie, m.id_movie, m.title, m.realease_date FROM film_genre f INNER JOIN associated a ON f.id_filmGenre = a.id_filmGenre INNER JOIN movie m ON a.id_movie = m.id_movie WHERE f.id_filmGenre = :id");
