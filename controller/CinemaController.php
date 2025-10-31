@@ -44,9 +44,8 @@ class CinemaController {
             if($addGenre){  //SI on a la variable filtré
                 $requeteAddGenre = $pdo->prepare("INSERT INTO film_genre (category_name) VALUES (:addGenre)");
                 $requeteAddGenre->execute(['addGenre' => $addGenre]);
-                header("Location: index.php?action=listGenres");
-                exit;
-            //On va pouvoir stocker le tableau product vide dans la session, et quand des données sont envoyés et traité par les filtres, alors on remplira le teableau de la session ainsi les produits ajouté sont stocké dans la session
+                header("Location: index.php?action=listGenres"); //On veut éviter la répétition au rafraîchissement de l'action
+                exit; 
             }
         }
         require "view/listGenres.php";

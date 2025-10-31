@@ -8,7 +8,6 @@
             <th>NOM</th>
             <th>PRENOM</th>
             <th>Age</th>
-            <th>DETAIL</th>
         </tr>
     </thead>
     <tbody> <!-- On définit le contenue des colonnes -->
@@ -20,6 +19,34 @@
             <?php } ?> <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>
 </table>
+
+<p>Vous avez pas trouvé votre bonheur ? Ajouter votre acteur en quelques clicks !</p>
+<form action="index.php?action=listGenres" method="post">
+    <label for="first_name">Prénom : </label>
+    <input type="text"  name="first_name" placeholder="Prénom">
+    <label for="last_name">Nom : </label>
+    <input type="text"  name="last_name" placeholder="Nom">
+    <label for="birthday">Date de naissance : </label>
+    <input type="text"  name="birthday" placeholder=" Format : Année-Mois-Jour">
+    <label for="nationality">Nationalité : </label>
+    <input type="text"  name="nationality" placeholder="Nationalité">
+    <label for="sexe">Sexe : </label>
+    <input type="text"  name="sexe" placeholder="Sexe">
+    <label for="filmography">Nombre de séries et films : </label>
+    <input type="text"  name="filmography" placeholder="n°">
+    <fieldset>
+        <legend>Quel est son métier ? (choix multiple possible)</legend>
+        <div>
+            <label for="actor">Acteur</label>
+            <input type="checkbox" id="actor" name="actor">
+        </div>
+        <div>
+            <label for="director">Réalisateur</label>
+            <input type="checkbox" id="director" name="director">
+        </div>
+    </fieldset>
+    <button type="submit" name="submit">Ajouter</button> <!-- Penser à name le button submit car sinon $_POST n'aura pas la donnée -->
+</form>
 
 <?php
 

@@ -20,7 +20,7 @@
 <p>Vous avez pas trouvé votre bonheur ? Ajouter votre genre en un click !</p>
 <form action="index.php?action=listGenres" method="post">
     <input type="text"  name="genre_name" placeholder="Comédie musicale, horreur, ...">
-    <button type="submit" name="submit">+</button>
+    <button type="submit" name="submit">Ajouter</button> <!-- Penser à name le button submit car sinon $_POST n'aura pas la donnée -->
 </form>
 <?php
 

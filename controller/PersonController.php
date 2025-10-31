@@ -11,7 +11,7 @@ class PersonController {
         SELECT a.id_actor, p.first_name, p.last_name, FLOOR(DATEDIFF(CAST(NOW() AS DATE), p.birthday) / 365.25) AS age
         FROM actor a
         INNER JOIN person p ON a.id_person = p.id_person
-        "); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie       
+        "); //on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie
         require "view/person/listActeurs.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
     }
 
@@ -50,5 +50,44 @@ class PersonController {
         $requeteFilmographie = $pdo->prepare("SELECT m.title, m.realease_date, m.id_movie FROM movie m WHERE m.id_director = :id");
         $requeteFilmographie->execute(["id" => $id]);
         require "view/person/detailRealisateur.php";
+    }
+
+    /** Ajouter une personne + checkbox acteur/réalisateur **/
+
+    public function ajouterPersonne() {
+        $pdo = Connect::seConnecter();
+        if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
+        //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
+        $firstName = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //filter sanitize permet de "nettoyer" les données en retirant les balises html et d'encoder les charactères qui sont en dehors des normes ASCII (full special chars)
+        $lastName = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $birthday = filter_input(INPUT_POST, "birthday", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_INT);
+        $nationality = filter_input(INPUT_POST, "nationality", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $filmography = filter_input(INPUT_POST, "filmography", FILTER_VALIDATE_INT);
+
+        $actor = isset($_POST['actor']) ? 1 : 0;
+        $director = isset($_POST['director']) ? 1 : 0;
+
+            if($firstName && $lastName && $birthday && $nationality && $sexe && $filmography){  //SI on a la variable filtré
+                $requeteAddPerson = $pdo->prepare("INSERT INTO person p (p.first_name, p.last_name, p.birthday, p.nationality, p.sexe, p.filmography)
+                VALUES (:first_name, :last_name, :birthday, :nationality, :sexe, :filmography)");
+                $requeteAddPerson->execute(['first_name' => $first_name], ['last_name' => $last_name], ['birthday' => $birthday], ['nationality' => $nationality], ['sexe' => $sexe], ['filmography' => $filmography]);
+                header("Location: index.php?action=listActeurs"); //On veut éviter la répétition au rafraîchissement de l'action
+                exit;
+            }
+        
+            if(!$actor || !$director) { //Si actor OU director n'est pas coché
+                echo "Veuillez cocher au moins l'une des deux cases";
+
+            } elseif ($actor && $director) {
+                $idPerson = $pdo->lastInsertedID();
+                $requeteAddID = $pdo->prepare("INSERT INTO actor (id_person)
+                VALUES (:id);
+                INSERT INTO director (id_person)
+                VALUES (:id)");
+                $requeteAddID->execute(["id" => $idPerson]);
+            } else 
+
+        }
     }
 }
