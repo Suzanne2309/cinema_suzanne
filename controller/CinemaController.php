@@ -32,10 +32,26 @@ class CinemaController {
     public function listGenres() { //On crée la méthode qui permettra d'afficher une liste des films
         $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
         $requeteGenres = $pdo->query(" 
-        SELECT f.id_filmGenre,f.category_name
+        SELECT f.id_filmGenre, f.category_name
         FROM film_genre f"
-       ); 
-// on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie       
+       ); // on va executer la requette sql de notre choix (ici afficher le titre et la date de sortie des films du tableau movie
+
+        if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
+        //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
+        $addGenre = filter_input(INPUT_POST, "genre_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //filter sanitize permet de "nettoyer" les données en retirant les balises html et d'encoder les charactères qui sont en dehors des normes ASCII (full special chars)
+        }
+        if($addGenre){  //SI on a la variable filtré
+            $genre = [ //ALORS on peut créer le tableau associatif contenant les données sous formes de variable  
+                "genre_name" => $name, 
+            ];
+
+            $pdo - Connect::seConnecter();
+            $requeteAddGenre = $pdo->query("
+            INSERT INTO film_genre (category_name)
+            VALUES ("$name");
+            ");
+         //On va pouvoir stocker le tableau product vide dans la session, et quand des données sont envoyés et traité par les filtres, alors on remplira le teableau de la session ainsi les produits ajouté sont stocké dans la session
+        }
         require "view/listGenres.php"; //On utilise un require pour relier à la vue(fichier view) qui nous intéresse (ici le fichier ListFilms.php)
     }
 

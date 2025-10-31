@@ -17,9 +17,11 @@
     </tbody>
 </table>
 
-<p>Vous avez pas trouvé votre bonheur ? Ajouter votre film en un click !</p>
-<button><a href="#">+</a></button>
-
+<p>Vous avez pas trouvé votre bonheur ? Ajouter votre genre en un click !</p>
+<form action="index.php" method="post">
+    <input type="text" placeholder="Comédie musicale, horreur, ..." name="genre_name">
+    <button type="submit"><a href="#">+</a></button>
+</form>
 <?php
 
 //On définit les variables et seront les paramètres dont il faudra définir la valeur à CHAQUE VUE
