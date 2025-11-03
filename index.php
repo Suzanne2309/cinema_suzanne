@@ -20,6 +20,9 @@ if(isset($_GET["action"])) {  //SI la variable est définie (déclarée et non-n
         case "listGenres" : $ctrlCinema->listGenres(); break;
         case "listFilmsByGenre" : $ctrlCinema->listFilmsByGenre($id); break;
         case "listActeurs" : $ctrlPerson->listActeurs(); break;
+        case "ajouterActeur" : $ctrlPerson->ajouterActeur(); break;
+        case "supprimerActeur" : $ctrlPerson->supprimerActeur(); break;
+        case "ajouterRealisateur" : $ctrlPerson->ajouterRealisateur(); break;
         case "listRealisateurs" : $ctrlPerson->listRealisateurs(); break;
         case "detailActeur" : $ctrlPerson->detailActeur($id); break;
         case "detailFilm" : $ctrlCinema->detailFilm($id); break; //action va récupérer la liste des acteurs à travers de casting dans la classe controllerCinema

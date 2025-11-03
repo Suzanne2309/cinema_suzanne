@@ -19,7 +19,6 @@ $acteur = $requeteDetailActeur->fetch(); ?>
                 <td><?php echo $acteur["birthday"]; ?></td>
                 <td><?php echo $acteur["age"]; ?></td>
                 <td><?php echo $acteur["nationality"]; ?></td>
-                <td><?php echo $acteur["filmography"]; ?></td>
             </tr>
             <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>

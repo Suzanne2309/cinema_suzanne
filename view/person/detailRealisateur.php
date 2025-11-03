@@ -18,7 +18,6 @@ $realisateur = $requeteDetailRealisateur->fetch(); ?>
                 <td><?php echo $realisateur["birthday"]; ?></td>
                 <td><?php echo $realisateur["age"]; ?></td>
                 <td><?php echo $realisateur["nationality"]; ?></td>
-                <td><?php echo $realisateur["filmography"]; ?></td>
             </tr>
 
     </tbody>

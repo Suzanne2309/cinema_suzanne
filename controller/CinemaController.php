@@ -40,7 +40,7 @@ class CinemaController {
         if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
         //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
         $addGenre = filter_input(INPUT_POST, "genre_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //filter sanitize permet de "nettoyer" les données en retirant les balises html et d'encoder les charactères qui sont en dehors des normes ASCII (full special chars)
-            var_dump($_POST);
+
             if($addGenre){  //SI on a la variable filtré
                 $requeteAddGenre = $pdo->prepare("INSERT INTO film_genre (category_name) VALUES (:addGenre)");
                 $requeteAddGenre->execute(['addGenre' => $addGenre]);

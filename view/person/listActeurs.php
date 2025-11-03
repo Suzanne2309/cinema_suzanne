@@ -21,7 +21,7 @@
 </table>
 
 <p>Vous avez pas trouvé votre bonheur ? Ajouter votre acteur en quelques clicks !</p>
-<form action="index.php?action=listGenres" method="post">
+<form action="index.php?action=ajouterActeur" method="post">
     <label for="first_name">Prénom : </label>
     <input type="text"  name="first_name" placeholder="Prénom">
     <label for="last_name">Nom : </label>
@@ -31,23 +31,35 @@
     <label for="nationality">Nationalité : </label>
     <input type="text"  name="nationality" placeholder="Nationalité">
     <label for="sexe">Sexe : </label>
-    <input type="text"  name="sexe" placeholder="Sexe">
-    <label for="filmography">Nombre de séries et films : </label>
-    <input type="text"  name="filmography" placeholder="n°">
+        <select name="sexe" id="sexe-select">
+            <option value="">Choississez une option</option>
+            <option value="homme" name="homme">Homme</option>
+            <option value="femme" name="femme">Femme</option>
+            <option value="autre" name="autre">Autre</option>
+        </select>
     <fieldset>
         <legend>Quel est son métier ? (choix multiple possible)</legend>
         <div>
             <label for="actor">Acteur</label>
-            <input type="checkbox" id="actor" name="actor">
+            <input type="checkbox" id="actor" value="actor" name="actor">
         </div>
         <div>
             <label for="director">Réalisateur</label>
-            <input type="checkbox" id="director" name="director">
+            <input type="checkbox" id="director" value="director" name="director">
         </div>
     </fieldset>
     <button type="submit" name="submit">Ajouter</button> <!-- Penser à name le button submit car sinon $_POST n'aura pas la donnée -->
 </form>
 
+<form action="index.php?action=supprimerActeur" method="post">
+    <label for="delete">Vous souahitez supprimer un acteur ?</label>
+    <select name="delete" id="delete">
+        <option value="">choississez l'acteur à supprimer</option>
+        <?php foreach($acteurs['id_actor'] as $id => $acteur) { ?>
+        <option value="<?php echo $id; ?>"><?= $acteurs["last_name"];?> <?= $acteurs["first_name"];?></option>
+        <?php }?>
+    </select>
+</form>
 <?php
 
 //On définit les variables et seront les paramètres dont il faudra définir la valeur à CHAQUE VUE

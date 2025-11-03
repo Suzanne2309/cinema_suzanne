@@ -52,9 +52,9 @@ class PersonController {
         require "view/person/detailRealisateur.php";
     }
 
-    /** Ajouter une personne + checkbox acteur/réalisateur **/
+    /** Ajouter une personne **/
 
-    public function ajouterPersonne() {
+    public function ajouterActeur() {
         $pdo = Connect::seConnecter();
         if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
         //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
@@ -63,45 +63,64 @@ class PersonController {
         $birthday = filter_input(INPUT_POST, "birthday", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $nationality = filter_input(INPUT_POST, "nationality", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $filmography = filter_input(INPUT_POST, "filmography", FILTER_VALIDATE_INT);
 
         $actor = isset($_POST['actor']) ? 1 : 0;
         $director = isset($_POST['director']) ? 1 : 0;
+        if(!$actor && !$director) { //Si actor ET director n'est pas coché
+            echo "Veuillez cocher au moins l'une des deux cases"; //ALORS on affiche un message d'erreur
+        return;}
 
-            if($firstName && $lastName && $birthday && $nationality && $sexe && $filmography){  //SI on a la variable filtré
-                $requeteAddPerson = $pdo->prepare("INSERT INTO person (first_name, last_name, birthday, nationality, sexe, filmography)
-                VALUES (:first_name, :last_name, :birthday, :nationality, :sexe, :filmography)");
-                $requeteAddPerson->execute(['first_name' => $first_name], ['last_name' => $last_name], ['birthday' => $birthday], ['nationality' => $nationality], ['sexe' => $sexe], ['filmography' => $filmography]);
+            if($firstName && $lastName && $birthday && $nationality && $sexe) {  //SI on a la variable filtré
+                $requeteAddPerson = $pdo->prepare("INSERT INTO person (first_name, last_name, birthday, nationality, sexe)
+                VALUES (:first_name, :last_name, :birthday, :nationality, :sexe)");
+                $requeteAddPerson->execute(['first_name' => $firstName, 'last_name' => $lastName, 'birthday' => $birthday, 'nationality' => $nationality, 'sexe' => $sexe]);
             };
 
-            if(!$actor && !$director) { //Si actor ET director n'est pas coché
-                echo "Veuillez cocher au moins l'une des deux cases"; //ALORS on affiche un message d'erreur
-                return;
-            };
 
-            if($actor && $director) { //Si actor OU director n'est pas coché
-                $idPerson = $pdo->lastInsertedId();
-                $requeteAddIdActor = $pdo->prepare("INSERT INTO actor (id_person)
-                VALUES (:id)");
-                $requeteAddIdActor->execute(["id" => $idPerson]);
-                $requeteAddID = $pdo->prepare("INSERT INTO director (id_person)
-                VALUES (:id)");
-                $requeteAddIdDirector->execute(["id" => $idPerson]);
-                require "view/accueil.php";
-
-            } elseif ($actor) {
-                $idPerson = $pdo->lastInsertedI();
+            if($actor === 1) {
+                $idPerson = $pdo->lastInsertId();
                 $requeteAddID = $pdo->prepare("INSERT INTO actor (id_person) VALUES (:id);");
                 $requeteAddID->execute(["id" => $idPerson]);
-                require "view/person/listActeurs.php";
-
-            } else {
-                $idPerson = $pdo->lastInsertedId();
-                $requeteAddID = $pdo->prepare("INSERT INTO director (id_person) VALUES (:id);");
-                $requeteAddID->execute(["id" => $idPerson]);  
-                require "view/person/listRealisateurs.php";  
-            }
+            };
 
         }
+
+    }
+    
+    public function ajouterRealisateur() {
+        $pdo = Connect::seConnecter();
+        if(isset($_POST['submit'])){ //SI les données ajouté avec le bouton submit sont différents de null
+        //ALORS elles sont filtré pour s'assurer que la variable soit pas faussée (malveillance, faute de frappe,...) avec filter_input
+        $firstName = filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //filter sanitize permet de "nettoyer" les données en retirant les balises html et d'encoder les charactères qui sont en dehors des normes ASCII (full special chars)
+        $lastName = filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $birthday = filter_input(INPUT_POST, "birthday", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $nationality = filter_input(INPUT_POST, "nationality", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+        $actor = isset($_POST['actor']) ? 1 : 0;
+        $director = isset($_POST['director']) ? 1 : 0;
+        if(!$actor && !$director) { //Si actor ET director n'est pas coché
+            echo "Veuillez cocher au moins l'une des deux cases"; //ALORS on affiche un message d'erreur
+        return;}
+
+            if($firstName && $lastName && $birthday && $nationality && $sexe) {  //SI on a la variable filtré
+                $requeteAddPerson = $pdo->prepare("INSERT INTO person (first_name, last_name, birthday, nationality, sexe)
+                VALUES (:first_name, :last_name, :birthday, :nationality, :sexe)");
+                $requeteAddPerson->execute(['first_name' => $firstName, 'last_name' => $lastName, 'birthday' => $birthday, 'nationality' => $nationality, 'sexe' => $sexe]);
+            };
+
+
+            if($director === 1) {
+                $idPerson = $pdo->lastInsertId();
+                $requeteAddID = $pdo->prepare("INSERT INTO director (id_person) VALUES (:id);");
+                $requeteAddID->execute(["id" => $idPerson]);
+            };
+
+        }
+    }
+
+    public function supprimerActeur() {
+        $pdo = Connect::seConnecter();
+        
     }
 }
