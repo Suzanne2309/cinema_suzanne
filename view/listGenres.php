@@ -12,6 +12,13 @@
         <?php foreach($requeteGenres->fetchALL() as $genre) { ?> <!-- On va crée une boucle qui va interprêter les données envoyés par la requêtte (fetchALL : ALL car la requêtte est sur plusieurs lignes) sous forme de tableau -->
             <tr>
                 <td><a href="index.php?action=listFilmsByGenre&id=<?= $genre['id_filmGenre'] ?>"><?= $genre["category_name"]?></a></td>
+                <td><a href="index.php?action=supprimerGenre&id=<?= $genre['id_filmGenre'] ?>">X</a></td>
+                <td>
+                    <form action="index.php?action=updateGenre&id=<?= $genre['id_filmGenre']?>" method="post">
+                        <input type="text" name="update_name" placeholder="Modifier le nom du Genre">
+                        <button type="submit" name="submit">Update</button>
+                    </form>
+                </td>
             </tr>
             <?php } ?> <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>
@@ -22,6 +29,7 @@
     <input type="text"  name="genre_name" placeholder="Comédie musicale, horreur, ...">
     <button type="submit" name="submit">Ajouter</button> <!-- Penser à name le button submit car sinon $_POST n'aura pas la donnée -->
 </form>
+
 <?php
 
 //On définit les variables et seront les paramètres dont il faudra définir la valeur à CHAQUE VUE

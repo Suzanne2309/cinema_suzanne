@@ -4,12 +4,11 @@ $acteur = $requeteDetailActeur->fetch(); ?>
 <table class="uk-label uk-table-striped"> <!-- On crée un tableau pour afficher la liste des films, avec leur titre et date de sortie -->
     <thead> <!-- On définit la ligne des titres des colonnes -->
         <tr>
-            <th>NOM</th>
-            <th>PRENOM</th>
+            <th>NOM PRENOM</th>
             <th>DATE DE NAISSANCE</th>
             <th>AGE</th>
             <th>NATIONALITE</th>
-            <th>PARTICIPATION FILMS ET SERIES</th>
+            <th>GENRE</th>
         </tr>
     </thead>
     <tbody> <!-- On définit le contenue des colonnes -->
@@ -19,6 +18,8 @@ $acteur = $requeteDetailActeur->fetch(); ?>
                 <td><?php echo $acteur["birthday"]; ?></td>
                 <td><?php echo $acteur["age"]; ?></td>
                 <td><?php echo $acteur["nationality"]; ?></td>
+                <td><?php echo $acteur["sexe"]; ?></td>
+
             </tr>
             <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>

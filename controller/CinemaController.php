@@ -57,4 +57,43 @@ class CinemaController {
         $requeteListFilmsByGenre->execute(["id" => $id]);
         require "view/listFilmsByGenre.php";
     }
+
+    public function supprimerGenre($id) {
+        $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
+        $requeteGenres = $pdo->query(" 
+        SELECT f.id_filmGenre, f.category_name
+        FROM film_genre f"
+        ); 
+
+        $pdo = Connect::seConnecter();
+        $requeteDeleteFilmGenre = $pdo->prepare("DELETE FROM film_genre WHERE id_filmGenre = :id");
+        $requeteDeleteFilmGenre->execute(["id" => $id]);
+        require "view/listGenres.php";
+    }
+
+    public function supprimerFilm($id) {
+        $pdo = Connect::seConnecter();
+        $requeteDeleteFilm = $pdo->prepare("DELETE FROM movie WHERE id_movie = :id");
+        $requeteDeleteFilm->execute(["id" => $id]);
+        require "view/listFilms.php";
+    }
+
+    public function updateGenre($id) {
+        $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
+        $requeteGenres = $pdo->query(" 
+        SELECT f.id_filmGenre, f.category_name
+        FROM film_genre f"
+        ); 
+
+        $pdo = Connect::seConnecter();
+        if(isset($_POST['submit'])){
+        $updateCategoryName = filter_input(INPUT_POST, "category_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($updateCategoryName){
+                $requeteUpdateGenre = $pdo->prepare("UPDATE film_genre SET category_name = ':update_name' WHERE id_filmGenre = :id");
+                $requeteUpdateGenre->execute(["id" => $id, "update_name" => $updateCategoryName]);
+            }
+        }
+        require "view/listGenres.php";
+    }
 }

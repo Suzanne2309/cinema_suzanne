@@ -14,6 +14,7 @@
             <tr>
                 <td><a href="index.php?action=detailFilm&id=<?= $film['id_movie'] ?>"><?= $film["title"] ?></a></td> <!-- On va ajouter dans le tableau film, le titre du film -->
                 <td><?= $film["realease_date"] ?></td> <!-- On va ajouter la date de sortie du film correspondant au tableau -->
+                <td><a href="index.php?action=supprimerFilm&id=<?= $film['id_movie'] ?>">X</a></td>
             </tr>
             <?php } ?> <!--Donc à chaque nouvelle boucle, on va ajouter le titre et la date de sortie au film correspondant-->
     </tbody>

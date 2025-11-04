@@ -5,10 +5,8 @@
 <table class="uk-label uk-table-striped"> <!-- On crée un tableau pour afficher la liste des films, avec leur titre et date de sortie -->
     <thead> <!-- On définit la ligne des titres des colonnes -->
         <tr>
-            <th>NOM</th>
-            <th>PRENOM</th>
+            <th>NOM PRENOM</th>
             <th>AGE</th>
-            <th>DETAIL</th>
         </tr>
     </thead>
     <tbody> <!-- On définit le contenue des colonnes -->

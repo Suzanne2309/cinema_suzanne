@@ -5,9 +5,9 @@
 <table class="uk-label uk-table-striped"> <!-- On crée un tableau pour afficher la liste des films, avec leur titre et date de sortie -->
     <thead> <!-- On définit la ligne des titres des colonnes -->
         <tr>
-            <th>NOM</th>
-            <th>PRENOM</th>
+            <th>NOM PRENOM</th>
             <th>Age</th>
+            <th>Genre</th>
         </tr>
     </thead>
     <tbody> <!-- On définit le contenue des colonnes -->
@@ -51,15 +51,6 @@
     <button type="submit" name="submit">Ajouter</button> <!-- Penser à name le button submit car sinon $_POST n'aura pas la donnée -->
 </form>
 
-<form action="index.php?action=supprimerActeur" method="post">
-    <label for="delete">Vous souahitez supprimer un acteur ?</label>
-    <select name="delete" id="delete">
-        <option value="">choississez l'acteur à supprimer</option>
-        <?php foreach($acteurs['id_actor'] as $id => $acteur) { ?>
-        <option value="<?php echo $id; ?>"><?= $acteurs["last_name"];?> <?= $acteurs["first_name"];?></option>
-        <?php }?>
-    </select>
-</form>
 <?php
 
 //On définit les variables et seront les paramètres dont il faudra définir la valeur à CHAQUE VUE

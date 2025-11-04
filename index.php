@@ -21,7 +21,9 @@ if(isset($_GET["action"])) {  //SI la variable est définie (déclarée et non-n
         case "listFilmsByGenre" : $ctrlCinema->listFilmsByGenre($id); break;
         case "listActeurs" : $ctrlPerson->listActeurs(); break;
         case "ajouterActeur" : $ctrlPerson->ajouterActeur(); break;
-        case "supprimerActeur" : $ctrlPerson->supprimerActeur(); break;
+        case "supprimerGenre" : $ctrlCinema->supprimerGenre($id); break;
+        case "supprimerFilm" : $ctrlCinema->supprimerFilm($id); break;
+        case "updateGenre" : $ctrlCinema->updateGenre($id); break;
         case "ajouterRealisateur" : $ctrlPerson->ajouterRealisateur(); break;
         case "listRealisateurs" : $ctrlPerson->listRealisateurs(); break;
         case "detailActeur" : $ctrlPerson->detailActeur($id); break;
