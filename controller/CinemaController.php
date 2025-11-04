@@ -68,6 +68,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requeteDeleteFilmGenre = $pdo->prepare("DELETE FROM film_genre WHERE id_filmGenre = :id");
         $requeteDeleteFilmGenre->execute(["id" => $id]);
+
         require "view/listGenres.php";
     }
 
@@ -87,10 +88,10 @@ class CinemaController {
 
         $pdo = Connect::seConnecter();
         if(isset($_POST['submit'])){
-        $updateCategoryName = filter_input(INPUT_POST, "category_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $updateCategoryName = filter_input(INPUT_POST, "update_name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             if($updateCategoryName){
-                $requeteUpdateGenre = $pdo->prepare("UPDATE film_genre SET category_name = ':update_name' WHERE id_filmGenre = :id");
+                $requeteUpdateGenre = $pdo->prepare("UPDATE film_genre SET category_name = :update_name WHERE id_filmGenre = :id");
                 $requeteUpdateGenre->execute(["id" => $id, "update_name" => $updateCategoryName]);
             }
         }
