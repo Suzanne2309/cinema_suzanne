@@ -13,11 +13,11 @@ body {
 /********************************* Header *********************************/
 header {
     width: 100%;
-    padding: 0.5em 5em;
+    padding: 0.5em 3.5em;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5em;
+    gap: 6em;
 }
 
     /*** Partie gauche de la topbar ***/
@@ -30,16 +30,17 @@ header {
 
 .front_navbar .logo {
     width: 60%;
-    padding: 0.5em;
+    padding: 0 1em 0 0;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
-    gap: 0.4em;
+    gap: 0.2em;
 }
 
-.front_navbar .logo .h1 {
+.front_navbar .logo h1 {
     width: 85%;
     color: #FFDFAC;
+    text-align: end;
 }
 
 .front_navbar .logo img{
@@ -197,8 +198,31 @@ nav li a:hover {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
+/*** wrapper et main view template ***/
+
+.wrapper {
+    width: 100%;
+}
+
+.main {
+    width: 100%;
+}
+
+#contenu {
+    width: 100%;
+}
+
+.contenu {
+    width: 100%;
+    color: #FFDFAC;
+    font-size: 2em;
+    text-align: center;
+}
 
 /********************************* Main : Accueil *********************************/
+
+
+
 .inscription {
     width: 100%;
 }
@@ -212,5 +236,7 @@ nav li a:hover {
 }
 
 /********************************* Footer *********************************/
+
+
 
 /********************************* Media Queries *********************************/

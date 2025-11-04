@@ -41,11 +41,10 @@
         </div>
     </header>
 
-    <div id="wrapper" class="uk-container uk-container-expand">
+    <div id="wrapper" class="wrapper">
         <main>
             <div id="contenu">
-                <h1>Popcorn</h1>
-                <h2><?= $titre_secondaire ?></h2>
+                <h2 class="contenu"><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>
             </div>
         </main>
