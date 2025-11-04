@@ -68,14 +68,23 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requeteDeleteFilmGenre = $pdo->prepare("DELETE FROM film_genre WHERE id_filmGenre = :id");
         $requeteDeleteFilmGenre->execute(["id" => $id]);
+        header("Location: index.php?action=listGenres"); //On veut éviter la répétition au rafraîchissement de l'action 
 
         require "view/listGenres.php";
     }
 
     public function supprimerFilm($id) {
+        $pdo = Connect::seConnecter(); //On fait appel à la classe native $pdo qui va donc créer une connexion à la méthode statique de la classe connect pour se connecter sur la base de donnée
+        $requete = $pdo->query(" 
+            SELECT id_movie, title, realease_date
+            FROM movie
+        ");
+
         $pdo = Connect::seConnecter();
         $requeteDeleteFilm = $pdo->prepare("DELETE FROM movie WHERE id_movie = :id");
         $requeteDeleteFilm->execute(["id" => $id]);
+        header("Location: index.php?action=listGenres"); //On veut éviter la répétition au rafraîchissement de l'action
+
         require "view/listFilms.php";
     }
 
@@ -93,6 +102,7 @@ class CinemaController {
             if($updateCategoryName){
                 $requeteUpdateGenre = $pdo->prepare("UPDATE film_genre SET category_name = :update_name WHERE id_filmGenre = :id");
                 $requeteUpdateGenre->execute(["id" => $id, "update_name" => $updateCategoryName]);
+                header("Location: index.php?action=listGenres"); //On veut éviter la répétition au rafraîchissement de l'action
             }
         }
         require "view/listGenres.php";
